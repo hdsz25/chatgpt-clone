@@ -80,3 +80,29 @@ The easiest way to run ChatGPT Clone is by using docker
 docker-compose up
 ```
 
+### Developing for the Web api from gpt4free
+Need to change config.json file to below:
+
+```
+{
+    "site_config": {
+        "host" : "0.0.0.0",
+        "port" : 1338,
+        "debug": false
+    },
+    "openai_key": "",
+
+    "openai_api_base": "http://localhost:1337/chat/completions",
+    "proxy": {
+        "enable": false,
+        "http": "127.0.0.1:7890",
+        "https": "127.0.0.1:7890"
+    }
+}
+```
+Then change .\server\backend.py:
+
+```
+# url = f"{self.openai_api_base}/v1/chat/completions"
+url=self.openai_api_base
+```
