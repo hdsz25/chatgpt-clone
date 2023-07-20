@@ -6,7 +6,7 @@
     },
     "openai_key": "",
 
-    "openai_api_base": "http://localhost:1337/chat/completions",
+    "openai_api_base": "http://localhost:1337",
     "proxy": {
         "enable": false,
         "http": "127.0.0.1:7890",
