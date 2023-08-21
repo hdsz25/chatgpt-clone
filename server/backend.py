@@ -27,6 +27,8 @@ class Backend_Api:
     def _conversation(self):
         try:
             jailbreak = request.json['jailbreak']
+            provider = request.json['provider']
+            provider = provider if provider!="Default" else None
             internet_access = request.json['meta']['content']['internet_access']
             _conversation = request.json['meta']['content']['conversation']
             prompt = request.json['meta']['content']['parts'][0]
@@ -37,7 +39,7 @@ class Backend_Api:
             if internet_access:
                 search = get('https://ddg-api.herokuapp.com/search', params={
                     'query': prompt["content"],
-                    'limit': 3,
+                    'limit': 10,
                 })
 
                 blob = ''
@@ -72,6 +74,7 @@ class Backend_Api:
                 }, 
                 json    = {
                     'model'             : request.json['model'], 
+                    'provider'          : provider,
                     'messages'          : conversation,
                     'stream'            : True
                 },
